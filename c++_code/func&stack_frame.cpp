@@ -45,16 +45,16 @@ int MultiplyBy(int MulNum1, int MulNum2)
 	
 	return MulNum1 * MulNum2;
 }
-int main()
-{
-
-	int a = 3;
-	int b = 5;
-	int result = MultiplyBy(a, b);
-	PrintNumber(result);
-	//PrintHelloWorld();
-	
-	return 0;
-}
+//int main()
+//{
+//
+//	int a = 3;
+//	int b = 5;
+//	int result = MultiplyBy(a, b);
+//	PrintNumber(result);
+//	//PrintHelloWorld();
+//	
+//	return 0;
+//}
 
 
