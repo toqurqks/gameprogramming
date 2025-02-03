@@ -1,6 +1,33 @@
 #include <iostream>
 using namespace std;
 
+//const는 실제로 메모리에 변수가 올라감
+//const int SCISSOR = 1;
+//const int ROCK = 2;
+//const int PAPER = 3;
+
+// enum 사용법
+// 묶어볼만한 변수들 묶어서 관리하기
+// const의 경우에는 반드시 초기값 설정 필요
+// enum의 경우에는 숫자를 지정안하면 첫 값은 0 부터 시작
+// 그 다음 값들은 이전 값 +1
+// enum은 메모리에 올라가는게 아니라 0,1,2등의 숫자로 바로 대체됨
+//enum
+//{
+//	ENUM_SISSORS, // 0
+//	ENUM_ROCK, // 1
+//	ENUM_PAPER // 2
+//};
+
+enum
+{
+	ENUM_SISSORS = 1, // 1
+	ENUM_ROCK, // 2
+	ENUM_PAPER // 3
+};
+
+#define DEFINE_SCISSORS 1
+
 int main()
 {
 #pragma region star
@@ -58,116 +85,118 @@ int main()
 #pragma endregion
 
 #pragma region rock
-	// 가위 바위 보 게임 만들기
-	srand(time(0)); // 시드 설정
+	//// 가위 바위 보 게임 만들기
+	//srand(time(0)); // 시드 설정
 
-	// 0, 1, 2
-	// 랜덤한 수를 추출하는 함수이며 범위를 3으로 설정하기 위해 
-	// 3으로 나눈 나머지를 값으로 설정
-	// 랜덤 값으로 원하는 건 1~3이기 떄문에 1을 더하여 사용
-	rand(); //0~32767
+	//// 0, 1, 2
+	//// 랜덤한 수를 추출하는 함수이며 범위를 3으로 설정하기 위해 
+	//// 3으로 나눈 나머지를 값으로 설정
+	//// 랜덤 값으로 원하는 건 1~3이기 떄문에 1을 더하여 사용
+	//rand(); //0~32767
 
-	const int SCISSOR = 1;
-	const int ROCK = 2;
-	const int PAPER = 3;
-	
-	int randval;
-	int userval;
-	int win = 0;
-	int num_game = 0;
-	// 게임이 무한대로 실행됨
-	// 가위 바위 보를 입력받아서 컴퓨터의 값과 비교하여, 승패를 출력하기
-	cout << "가위, 바위, 보 게임입니다." << endl;
-	while (true)
-	{
-		num_game++;
-		cout << "가위(1), 바위(2), 보(3)를 입력해주세요." << endl;
-		cout << "4를 입력하면 종료됩니다." << endl;
-		cin >> userval;
+	//stack 메모리에 올라감
+	//const int SCISSOR = 1;
+	//const int ROCK = 2;
+	//const int PAPER = 3;
+	//
+	//int randval;
+	//int userval;
+	//int win = 0;
+	//int num_game = 0;
+	//// 게임이 무한대로 실행됨
+	//// 가위 바위 보를 입력받아서 컴퓨터의 값과 비교하여, 승패를 출력하기
+	//cout << "가위, 바위, 보 게임입니다." << endl;
+	//while (true)
+	//{
+	//	num_game++;
+	//	cout << "가위(1), 바위(2), 보(3)를 입력해주세요." << endl;
+	//	cout << "4를 입력하면 종료됩니다." << endl;
+	//	cin >> userval;
 
-		randval = 1 + (rand() % 3);
-		// 구현중 생각해 보았던 부분
-		// 흠 기준이 달라짐에 따라 코드가 간결해지거나 단순해 질 부분이있는가?
-		// 유저를 기준으로 하는 경우 유저가 무엇을 내는지에 따라 분기를 타고
-		// 분기를 탄 후에 각 값과 비교하여 해당하는 케이스에 맞는 코드를 실행하는 방식
+	//	randval = 1 + (rand() % 3);
+	//	// 구현중 생각해 보았던 부분
+	//	// 흠 기준이 달라짐에 따라 코드가 간결해지거나 단순해 질 부분이있는가?
+	//	// 유저를 기준으로 하는 경우 유저가 무엇을 내는지에 따라 분기를 타고
+	//	// 분기를 탄 후에 각 값과 비교하여 해당하는 케이스에 맞는 코드를 실행하는 방식
 
-		// 컴퓨터가 내는 값을 기준으로 한다면
-		// 결국 컴퓨터가 내는 값 1, 2, 3
-		// 유저가 내는 값 1, 2, 3
-		// 값마다 결과가 달라 총 9가지의 경우의 수가 반드시 필요하기 때문에
-		// 코드를 간결하게 만들 방법은 없음
+	//	// 컴퓨터가 내는 값을 기준으로 한다면
+	//	// 결국 컴퓨터가 내는 값 1, 2, 3
+	//	// 유저가 내는 값 1, 2, 3
+	//	// 값마다 결과가 달라 총 9가지의 경우의 수가 반드시 필요하기 때문에
+	//	// 코드를 간결하게 만들 방법은 없음
 #pragma region user기준
-		if (userval == 1)
-		{
-			switch (randval)
-			{
-			case SCISSOR:
-				cout << "컴퓨터는 가위를 내서 비겼습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				break;
-			case ROCK:
-				cout << "컴퓨터는 바위를 내서 졌습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				break;
-			case PAPER:
-				cout << "컴퓨터는 보를 내서 이겼습니다." << endl;
-				cout << "현재 승률 : " << (win*100) / num_game << endl;
-				win++;
-				break;
-			}
-		}
-		else if (userval == 2)
-		{
-			switch (randval)
-			{
-			case SCISSOR:
-				cout << "컴퓨터는 가위를 내서 이겼습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				win++;
-				break;
-			case ROCK:
-				cout << "컴퓨터는 바위를 내서 비겼습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				break;
-			case PAPER:
-				cout << "컴퓨터는 보를 내서 졌습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				break;
-			}
-		}
-		else if(userval == 3)
-		{
-			switch (randval)
-			{
-			case SCISSOR:
-				cout << "컴퓨터는 가위를 내서 졌습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				break;
-			case ROCK:
-				cout << "컴퓨터는 바위를 내서 이겼습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				win++;
-				break;
-			case PAPER:
-				cout << "컴퓨터는 보를 내서 비겼습니다." << endl;
-				cout << "현재 승률 : " << (win * 100) / num_game << endl;
-				break;
-			}
+	//	if (userval == 1)
+	//	{
+	//		switch (randval)
+	//		{
+	//		case SCISSOR:
+	//			cout << "컴퓨터는 가위를 내서 비겼습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			break;
+	//		case ROCK:
+	//			cout << "컴퓨터는 바위를 내서 졌습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			break;
+	//		case PAPER:
+	//			cout << "컴퓨터는 보를 내서 이겼습니다." << endl;
+	//			cout << "현재 승률 : " << (win*100) / num_game << endl;
+	//			win++;
+	//			break;
+	//		}
+	//	}
+	//	else if (userval == 2)
+	//	{
+	//		switch (randval)
+	//		{
+	//		case SCISSOR:
+	//			cout << "컴퓨터는 가위를 내서 이겼습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			win++;
+	//			break;
+	//		case ROCK:
+	//			cout << "컴퓨터는 바위를 내서 비겼습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			break;
+	//		case PAPER:
+	//			cout << "컴퓨터는 보를 내서 졌습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			break;
+	//		}
+	//	}
+	//	else if(userval == 3)
+	//	{
+	//		switch (randval)
+	//		{
+	//		case SCISSOR:
+	//			cout << "컴퓨터는 가위를 내서 졌습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			break;
+	//		case ROCK:
+	//			cout << "컴퓨터는 바위를 내서 이겼습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			win++;
+	//			break;
+	//		case PAPER:
+	//			cout << "컴퓨터는 보를 내서 비겼습니다." << endl;
+	//			cout << "현재 승률 : " << (win * 100) / num_game << endl;
+	//			break;
+	//		}
 
-		}
-		else if(userval ==4)
-		{
-			cout << "종료합니다." << endl;
-			break;
-		}
-		else
-		{
-			cout << "잘못 입력했습니다." << endl;
-			num_game--;
-		}
-	}
+	//	}
+	//	else if(userval ==4)
+	//	{
+	//		cout << "종료합니다." << endl;
+	//		break;
+	//	}
+	//	else
+	//	{
+	//		cout << "잘못 입력했습니다." << endl;
+	//		num_game--;
+	//	}
+	//}
 #pragma endregion 
+#pragma endregion
 
-
+#pragma region 
 #pragma endregion
 }
